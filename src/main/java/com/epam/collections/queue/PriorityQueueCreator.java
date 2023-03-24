@@ -4,20 +4,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public class PriorityQueueCreator {
     public PriorityQueue<String> createPriorityQueue(List<String> firstList, List<String> secondList) {
-            firstList.addAll(secondList); //соединяем две коллекции
+        List<String> q = new ArrayList<>(firstList);
+        List<String> w = new ArrayList<>(secondList);
 
-        Collections.sort(firstList); //сортируем коллекцию
-        Collections.reverse(firstList); //переворачиваем
-
-        //переопределям компаратор (чтобы сортировал элементы в алфавитном обратном порядке
+        q.addAll(w);
+        Collections.sort(q);
+        Collections.reverse(q);
         Comparator<String> qw = Comparator.reverseOrder();
-
-        //передвем очереди компаратор по которому нужно сортировать
         PriorityQueue<String> queue = new PriorityQueue<>(qw);
-        queue.addAll(firstList); //передаем очереди коллекцию
+        queue.addAll(q);
 
         return queue;
     }
